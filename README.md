@@ -10,7 +10,7 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-gtm/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-gtm/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amaster)
 [![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/filament-gtm.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-gtm)
 
-This Filament plugin provides seamless integration of Google Tag Manager into your website or web application. It simplifies the process of adding and managing GTM tags, enabling you to effortlessly implement tracking, analytics, and marketing tags without modifying your site's core code. With this plugin, you can enhance your digital strategy by efficiently managing tags, tracking user interactions, and gathering valuable insights to optimize your website's performance.
+This Filament plugin provides seamless integration of Google Tag Manager into your Filament admin panels. It automatically injects GTM tracking code into your Filament application without requiring any manual template modifications. The plugin leverages Filament's render hooks to automatically add the necessary GTM scripts to the head and body sections of your admin panels, enabling you to track user interactions and gather valuable insights about your admin interface usage.
 
 ## Installation
 
@@ -22,23 +22,23 @@ composer require jeffersongoncalves/filament-gtm
 
 ## Usage
 
-Publish config file.
+This package automatically integrates Google Tag Manager with your Filament admin panels. Once installed, it will automatically inject the necessary GTM scripts into all your Filament panels without any additional configuration.
 
-```bash
-php artisan vendor:publish --tag=gtm-config
-```
+The package depends on `jeffersongoncalves/laravel-gtm` for GTM configuration. Please refer to that package's documentation for setting up your GTM container ID and other GTM-specific configurations.
 
-Add start head template.
+### Requirements
 
-```php
-@include('gtm::head')
-```
+- PHP 8.2 or higher
+- Laravel 11.0 or 12.0
+- Filament 4.0 or higher
 
-Add start body template.
+### Automatic Integration
 
-```php
-@include('gtm::body')
-```
+The package automatically registers render hooks with Filament to inject GTM code:
+- GTM head script is automatically added to the `<head>` section
+- GTM body script is automatically added after the `<body>` tag
+
+No manual template modifications are required.
 
 ## Testing
 
