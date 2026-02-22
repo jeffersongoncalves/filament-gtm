@@ -10,35 +10,67 @@
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-gtm/fix-php-code-style-issues.yml?branch=3.x&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-gtm/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3A3.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/filament-gtm.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-gtm)
 
-This Filament plugin provides seamless integration of Google Tag Manager into your Filament admin panels. It automatically injects GTM tracking code into your Filament application without requiring any manual template modifications. The plugin leverages Filament's render hooks to automatically add the necessary GTM scripts to the head and body sections of your admin panels, enabling you to track user interactions and gather valuable insights about your admin interface usage.
+Filament plugin for Google Tag Manager with a settings page powered by [Spatie Laravel Settings](https://github.com/spatie/laravel-settings). Manage your GTM container ID directly from the Filament admin panel.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require jeffersongoncalves/filament-gtm
+composer require jeffersongoncalves/filament-gtm:"^3.0"
+```
+
+Run the migrations to create the settings table:
+
+```bash
+php artisan migrate
 ```
 
 ## Usage
 
-This package automatically integrates Google Tag Manager with your Filament admin panels. Once installed, it will automatically inject the necessary GTM scripts into all your Filament panels without any additional configuration.
+### Register the Plugin
 
-The package depends on `jeffersongoncalves/laravel-gtm` for GTM configuration. Please refer to that package's documentation for setting up your GTM container ID and other GTM-specific configurations.
+Add the plugin to your Filament panel provider:
+
+```php
+use JeffersonGoncalves\Filament\Gtm\GtmPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            GtmPlugin::make(),
+        ]);
+}
+```
+
+The plugin will:
+- Register a **Settings Page** where you can manage your GTM container ID
+- Automatically inject GTM scripts into the `<head>` and `<body>` sections of your Filament panels
+
+### Customization
+
+#### Custom Navigation Group
+
+```php
+GtmPlugin::make()
+    ->navigationGroup('Integrations'),
+```
+
+#### Disable Settings Page
+
+If you only want the automatic GTM injection without the settings page:
+
+```php
+GtmPlugin::make()
+    ->settingsPage(false),
+```
 
 ### Requirements
 
 - PHP 8.2 or higher
-- Laravel 11.0 or 12.0
 - Filament 5.0
-
-### Automatic Integration
-
-The package automatically registers render hooks with Filament to inject GTM code:
-- GTM head script is automatically added to the `<head>` section
-- GTM body script is automatically added after the `<body>` tag
-
-No manual template modifications are required.
+- Laravel 11.0 or higher
 
 ## Testing
 
