@@ -50,13 +50,6 @@ The plugin will:
 
 ### Customization
 
-#### Custom Navigation Group
-
-```php
-GtmPlugin::make()
-    ->navigationGroup('Integrations'),
-```
-
 #### Disable Settings Page
 
 If you only want the automatic GTM injection without the settings page:

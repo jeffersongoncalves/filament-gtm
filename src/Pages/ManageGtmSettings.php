@@ -6,7 +6,6 @@ use Filament\Forms\Components\TextInput;
 use Filament\Pages\SettingsPage;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use JeffersonGoncalves\Filament\Gtm\GtmPlugin;
 use JeffersonGoncalves\Gtm\Settings\GtmSettings;
 
 class ManageGtmSettings extends SettingsPage
@@ -22,12 +21,7 @@ class ManageGtmSettings extends SettingsPage
 
     public static function getNavigationGroup(): ?string
     {
-        try {
-            return GtmPlugin::get()->getNavigationGroup()
-                ?? __('filament-gtm::pages.navigation_group');
-        } catch (\Exception) {
-            return __('filament-gtm::pages.navigation_group');
-        }
+        return __('filament-gtm::pages.navigation_group');
     }
 
     public function getTitle(): string

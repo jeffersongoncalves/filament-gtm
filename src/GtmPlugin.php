@@ -10,8 +10,6 @@ class GtmPlugin implements Plugin
 {
     protected bool $hasSettingsPage = true;
 
-    protected ?string $navigationGroup = null;
-
     public function getId(): string
     {
         return 'filament-gtm';
@@ -49,17 +47,5 @@ class GtmPlugin implements Plugin
         $this->hasSettingsPage = $condition;
 
         return $this;
-    }
-
-    public function navigationGroup(?string $group): static
-    {
-        $this->navigationGroup = $group;
-
-        return $this;
-    }
-
-    public function getNavigationGroup(): ?string
-    {
-        return $this->navigationGroup;
     }
 }
