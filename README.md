@@ -20,9 +20,10 @@ You can install the package via composer:
 composer require jeffersongoncalves/filament-gtm:"^1.0"
 ```
 
-Run the migrations to create the settings table:
+Publish the settings migrations and run them:
 
 ```bash
+php artisan vendor:publish --tag=gtm-settings-migrations
 php artisan migrate
 ```
 
