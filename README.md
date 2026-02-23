@@ -1,44 +1,69 @@
 <div class="filament-hidden">
 
-![Filament Google Tag Manager](https://raw.githubusercontent.com/jeffersongoncalves/filament-gtm/master/art/jeffersongoncalves-filament-gtm.png)
+![Filament Google Tag Manager](https://raw.githubusercontent.com/jeffersongoncalves/filament-gtm/1.x/art/jeffersongoncalves-filament-gtm.png)
 
 </div>
 
 # Filament Google Tag Manager
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/jeffersongoncalves/filament-gtm.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-gtm)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-gtm/fix-php-code-style-issues.yml?branch=master&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-gtm/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3Amaster)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/jeffersongoncalves/filament-gtm/fix-php-code-style-issues.yml?branch=1.x&label=code%20style&style=flat-square)](https://github.com/jeffersongoncalves/filament-gtm/actions?query=workflow%3A"Fix+PHP+code+styling"+branch%3A1.x)
 [![Total Downloads](https://img.shields.io/packagist/dt/jeffersongoncalves/filament-gtm.svg?style=flat-square)](https://packagist.org/packages/jeffersongoncalves/filament-gtm)
 
-This Filament plugin provides seamless integration of Google Tag Manager into your website or web application. It simplifies the process of adding and managing GTM tags, enabling you to effortlessly implement tracking, analytics, and marketing tags without modifying your site's core code. With this plugin, you can enhance your digital strategy by efficiently managing tags, tracking user interactions, and gathering valuable insights to optimize your website's performance.
+Filament plugin for Google Tag Manager with a settings page powered by [Spatie Laravel Settings](https://github.com/spatie/laravel-settings). Manage your GTM container ID directly from the Filament admin panel.
 
 ## Installation
 
 You can install the package via composer:
 
 ```bash
-composer require jeffersongoncalves/filament-gtm
+composer require jeffersongoncalves/filament-gtm:"^1.0"
+```
+
+Run the migrations to create the settings table:
+
+```bash
+php artisan migrate
 ```
 
 ## Usage
 
-Publish config file.
+### Register the Plugin
 
-```bash
-php artisan vendor:publish --tag=gtm-config
-```
-
-Add start head template.
+Add the plugin to your Filament panel provider:
 
 ```php
-@include('gtm::head')
+use JeffersonGoncalves\Filament\Gtm\GtmPlugin;
+
+public function panel(Panel $panel): Panel
+{
+    return $panel
+        ->plugins([
+            GtmPlugin::make(),
+        ]);
+}
 ```
 
-Add start body template.
+The plugin will:
+- Register a **Settings Page** where you can manage your GTM container ID
+- Automatically inject GTM scripts into the `<head>` and `<body>` sections of your Filament panels
+
+### Customization
+
+#### Disable Settings Page
+
+If you only want the automatic GTM injection without the settings page:
 
 ```php
-@include('gtm::body')
+GtmPlugin::make()
+    ->settingsPage(false),
 ```
+
+### Requirements
+
+- PHP 8.2 or higher
+- Filament 3.0
+- Laravel 11.0 or 12.0
 
 ## Testing
 
