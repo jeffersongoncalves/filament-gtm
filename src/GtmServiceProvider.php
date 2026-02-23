@@ -12,7 +12,8 @@ class GtmServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
-        $package->name('filament-gtm');
+        $package->name('filament-gtm')
+            ->hasTranslations();
     }
 
     public function packageRegistered(): void
