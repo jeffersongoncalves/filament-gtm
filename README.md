@@ -1,6 +1,6 @@
 <div class="filament-hidden">
 
-![Filament Gtm](https://raw.githubusercontent.com/jeffersongoncalves/filament-gtm/1.x/art/jeffersongoncalves-filament-gtm.jpg)
+![Filament Gtm](https://raw.githubusercontent.com/jeffersongoncalves/filament-gtm/1.x/art/jeffersongoncalves-filament-gtm.png)
 
 </div>
 
