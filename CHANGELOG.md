@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## 1.2.0 - 2026-06-23
+
+Refactor onto filament-analytics-core base classes; drop redundant dependencies (provided transitively via the cores).
+
 ## 1.1.0 - 2026-02-22
 
 ### Added
