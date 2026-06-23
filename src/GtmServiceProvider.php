@@ -2,23 +2,21 @@
 
 namespace JeffersonGoncalves\Filament\Gtm;
 
-use Filament\Support\Facades\FilamentView;
 use Filament\View\PanelsRenderHook;
-use Illuminate\Contracts\View\View;
-use Spatie\LaravelPackageTools\Package;
-use Spatie\LaravelPackageTools\PackageServiceProvider;
+use JeffersonGoncalves\FilamentAnalyticsCore\AbstractAnalyticsServiceProvider;
 
-class GtmServiceProvider extends PackageServiceProvider
+class GtmServiceProvider extends AbstractAnalyticsServiceProvider
 {
-    public function configurePackage(Package $package): void
+    protected function packageName(): string
     {
-        $package->name('filament-gtm')
-            ->hasTranslations();
+        return 'filament-gtm';
     }
 
-    public function packageRegistered(): void
+    protected function renderHooks(): array
     {
-        FilamentView::registerRenderHook(PanelsRenderHook::HEAD_START, fn (): View => view('gtm::head'));
-        FilamentView::registerRenderHook(PanelsRenderHook::BODY_START, fn (): View => view('gtm::body'));
+        return [
+            PanelsRenderHook::HEAD_START => 'gtm::head',
+            PanelsRenderHook::BODY_START => 'gtm::body',
+        ];
     }
 }
