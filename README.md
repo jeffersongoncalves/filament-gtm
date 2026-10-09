@@ -63,7 +63,16 @@ GtmPlugin::make()
     ->settingsPage(false),
 ```
 
-### Requirements
+#### Navigation group
+
+Put the settings page in one of your panel's own navigation groups (a string or a closure):
+
+```php
+GtmPlugin::make()
+    ->navigationGroup(fn (): string => __('admin.navigation.settings')),
+```
+
+## Requirements
 
 - PHP 8.2 or higher
 - Filament 5.0
